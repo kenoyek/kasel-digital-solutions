@@ -38,7 +38,7 @@ npm run build
 - `app/page.tsx` – webpage content and structure
 - `app/globals.css` – styling and responsive layouts
 - `app/layout.tsx` – page metadata and shared layout
-- `public/kasel-orb.png` – hero artwork
+- `public/kasel-logo.png` – hero artwork
 
 ## Before publishing
 
