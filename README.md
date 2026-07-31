@@ -42,6 +42,6 @@ npm run build
 
 ## Before publishing
 
-Confirm that `hello@kaseldigitalsolutions.com` is the correct business email. It appears in the contact section and project enquiry links.
+Confirm that `hello@kasel.digital` is the correct business email. It appears in the contact section and project enquiry links.
 
 © 2026 Kasel Digital Solutions Ltd.
