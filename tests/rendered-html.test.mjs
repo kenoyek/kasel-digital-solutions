@@ -149,8 +149,8 @@ test("renders the premium footer with working links", async () => {
     normalizedHtml,
     new RegExp(`© ${year} KASEL DIGITAL SOLUTIONS LTD\\. All rights reserved\\.`),
   );
-  assert.match(html, /aria-label="Visit Kasel Digital Solutions on Instagram"/);
-  assert.match(html, /aria-label="Chat with Kasel Digital Solutions on WhatsApp"/);
+  assert.doesNotMatch(html, /footer-social/);
+  assert.doesNotMatch(html, /footer-legal__links/);
   assert.doesNotMatch(html, />www\.kasel\.digital<\/a>/);
   assert.doesNotMatch(html, /Privacy Policy/);
   assert.doesNotMatch(html, /Terms of Use/);

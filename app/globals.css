@@ -1042,37 +1042,6 @@ h3 {
   line-height: 1.5;
 }
 
-.footer-legal__links {
-  align-items: center;
-  display: flex;
-  gap: 12px;
-}
-
-.footer-social {
-  align-items: center;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  color: var(--ice);
-  display: inline-flex;
-  height: 44px;
-  justify-content: center;
-  transition:
-    border-color 180ms ease,
-    color 180ms ease,
-    transform 180ms ease;
-  width: 44px;
-}
-
-.footer-social:hover {
-  border-color: var(--teal);
-  transform: translateY(-2px);
-}
-
-.footer-social svg {
-  height: 20px;
-  width: 20px;
-}
-
 .whatsapp-float {
   align-items: center;
   background: #0b1512;
