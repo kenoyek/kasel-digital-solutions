@@ -19,7 +19,8 @@ export default function ProjectForm() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const data = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const data = new FormData(form);
     const name = String(data.get("name") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
     const company = String(data.get("company") ?? "").trim();
@@ -87,7 +88,7 @@ export default function ProjectForm() {
       }
 
       setStatus(result.message ?? "Your project enquiry has been sent.");
-      event.currentTarget.reset();
+      form.reset();
     } catch {
       setFallbackUrl(mailtoUrl);
       setStatus("The form could not send. Use email or WhatsApp instead.");
