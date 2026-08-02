@@ -16,7 +16,7 @@ export default function KaselMark({ compact = false }: KaselMarkProps) {
         width={48}
       />
       <span className="kasel-mark__text">
-        <b>KASEL</b>
+        <b>Kasel</b>
         {!compact && <small>Digital Solutions Ltd</small>}
       </span>
     </span>

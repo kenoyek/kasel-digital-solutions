@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const developmentPreviewMeta =
@@ -75,4 +76,82 @@ test("serves crawl files and custom 404", async () => {
   const missing = await fetchFromWorker("/missing-page");
   assert.equal(missing.status, 404);
   assert.match(await missing.text(), /<h1>Page not found\.<\/h1>/i);
+});
+
+test("renders approved client logo carousel accessibly", async () => {
+  const response = await fetchFromWorker("/");
+  const html = await response.text();
+
+  assert.match(html, /data-client-logo-section="enabled"/);
+  assert.match(html, /Trusted by teams we(?:&#x27;|')ve helped move forward/);
+  assert.match(html, /alt="Asele logo"/);
+  assert.match(html, /alt="LearnEasy Academy logo"/);
+  assert.match(html, /alt="reframe logo"/);
+  assert.match(
+    html,
+    /<div aria-hidden="true" class="client-logo-carousel__set">/,
+  );
+  assert.match(html, /data-client-logo-carousel/);
+});
+
+test("client carousel data and styles stay intentional", async () => {
+  const dataSource = await readFile(
+    new URL("../app/data/clients.ts", import.meta.url),
+    "utf8",
+  );
+  const css = await readFile(
+    new URL("../app/globals.css", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(dataSource, /export type Client = \{/);
+  assert.match(dataSource, /CLIENT_LOGO_CAROUSEL_ENABLED = true/);
+  for (const logo of [
+    "/clients/asele.png",
+    "/clients/learneasy-academy.png",
+    "/clients/reframe-wordmark.png",
+  ]) {
+    assert.match(dataSource, new RegExp(`logo: "${logo}"`));
+  }
+
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(css, /\.client-logo-carousel:hover \.client-logo-carousel__track/);
+  assert.match(css, /\.client-logo-carousel:focus-within \.client-logo-carousel__track/);
+  assert.match(css, /overflow-x: hidden/);
+});
+
+test("renders the premium footer with working links", async () => {
+  const response = await fetchFromWorker("/");
+  const html = await response.text();
+  const normalizedHtml = html.replace(/<!-- -->/g, "");
+  const year = new Date().getFullYear();
+
+  assert.match(html, /<footer class="site-footer">/);
+  assert.match(html, /LET(?:&apos;|&#x27;|'|’)S BUILD WITH PRECISION/);
+  assert.match(html, /Have a product to build or a process to improve\?/);
+  assert.match(html, /href="#project-enquiry"/);
+  assert.match(html, /id="project-enquiry"/);
+  assert.match(
+    html,
+    /href="https:\/\/wa\.me\/2347075042166\?text=Hello%20Kasel%20Digital%20Solutions%2C%20I%20would%20like%20to%20discuss%20a%20project\."/,
+  );
+  assert.match(html, /Explore footer navigation/);
+  assert.match(html, /Services footer navigation/);
+  assert.match(html, /Web and mobile development/);
+  assert.match(html, /UI\/UX and brand design/);
+  assert.match(html, /AI and workflow automation/);
+  assert.match(html, /Cloud, data and analytics/);
+  assert.match(html, /Digital strategy/);
+  assert.match(html, /Call us/);
+  assert.match(html, /href="tel:\+2347075042166"/);
+  assert.match(html, /Precision in Motion/);
+  assert.match(
+    normalizedHtml,
+    new RegExp(`© ${year} KASEL DIGITAL SOLUTIONS LTD\\. All rights reserved\\.`),
+  );
+  assert.match(html, /aria-label="Visit Kasel Digital Solutions on Instagram"/);
+  assert.match(html, /aria-label="Chat with Kasel Digital Solutions on WhatsApp"/);
+  assert.doesNotMatch(html, />www\.kasel\.digital<\/a>/);
+  assert.doesNotMatch(html, /Privacy Policy/);
+  assert.doesNotMatch(html, /Terms of Use/);
 });
