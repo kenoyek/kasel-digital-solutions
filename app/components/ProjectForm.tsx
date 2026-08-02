@@ -12,9 +12,11 @@ function isValidEmail(value: string) {
 
 export default function ProjectForm() {
   const [errors, setErrors] = useState<Errors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState("");
+  const [fallbackUrl, setFallbackUrl] = useState("");
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
@@ -22,6 +24,7 @@ export default function ProjectForm() {
     const email = String(data.get("email") ?? "").trim();
     const company = String(data.get("company") ?? "").trim();
     const project = String(data.get("project") ?? "").trim();
+    const website = String(data.get("website") ?? "").trim();
     const nextErrors: Errors = {};
 
     if (!name) {
@@ -35,6 +38,7 @@ export default function ProjectForm() {
     }
 
     setErrors(nextErrors);
+    setFallbackUrl("");
 
     if (Object.keys(nextErrors).length > 0) {
       setStatus("Please fix the highlighted fields.");
@@ -52,14 +56,43 @@ export default function ProjectForm() {
       .filter(Boolean)
       .join("\n");
 
-    setStatus("Opening your email app with the project details.");
-    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(
+    const mailtoUrl = `mailto:${EMAIL}?subject=${encodeURIComponent(
       "Project enquiry for KASEL Digital Solutions",
     )}&body=${encodeURIComponent(body)}`;
+
+    setIsSubmitting(true);
+    setStatus("Sending your project enquiry.");
+
+    try {
+      const response = await fetch("/api/contact", {
+        body: JSON.stringify({ company, email, name, project, website }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      });
+      const result = (await response.json()) as { message?: string };
+
+      if (!response.ok) {
+        throw new Error(result.message ?? "The enquiry could not be sent.");
+      }
+
+      setStatus("Your project enquiry has been sent.");
+      event.currentTarget.reset();
+    } catch {
+      setFallbackUrl(mailtoUrl);
+      setStatus("The form could not send. Use email or WhatsApp instead.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <form className="project-form" noValidate onSubmit={handleSubmit}>
+      <label className="project-form__trap">
+        <span>Website</span>
+        <input autoComplete="off" name="website" tabIndex={-1} type="text" />
+      </label>
       <div className="field-row">
         <label>
           <span>Name</span>
@@ -98,12 +131,17 @@ export default function ProjectForm() {
         />
         {errors.project && <small id="project-error">{errors.project}</small>}
       </label>
-      <button className="button button--primary" type="submit">
-        Start a project
+      <button className="button button--primary" disabled={isSubmitting} type="submit">
+        {isSubmitting ? "Sending enquiry" : "Start a project"}
       </button>
       <p aria-live="polite" className="form-status" role="status">
         {status}
       </p>
+      {fallbackUrl && (
+        <a className="form-fallback" href={fallbackUrl}>
+          Open email instead
+        </a>
+      )}
     </form>
   );
 }

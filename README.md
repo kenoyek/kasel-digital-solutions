@@ -48,6 +48,14 @@ npx tsc --noEmit
 npm test
 ```
 
+## Contact form email
+
+The project enquiry form sends email through Resend. Configure these environment variables in the deployment platform:
+
+- `RESEND_API_KEY` – Resend API key
+- `RESEND_TO_EMAIL` – recipient address, defaults to `hello@kasel.digital`
+- `RESEND_FROM_EMAIL` – verified sender address, defaults to `KASEL Website <hello@kasel.digital>`
+
 ## Main files
 
 - `app/page.tsx` – webpage content and structure

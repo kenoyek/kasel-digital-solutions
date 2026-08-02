@@ -328,6 +328,12 @@ h3 {
   transform: translateY(-2px);
 }
 
+.button:disabled {
+  cursor: progress;
+  opacity: 0.62;
+  transform: none;
+}
+
 .hero__orb {
   align-items: center;
   display: grid;
@@ -683,6 +689,14 @@ h3 {
   gap: 8px;
 }
 
+.project-form__trap {
+  height: 1px;
+  left: -100vw;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+}
+
 .project-form label span {
   color: var(--ice);
   font-family: "Sora", ui-sans-serif, system-ui, sans-serif;
@@ -716,6 +730,17 @@ h3 {
 
 .form-status:empty {
   display: none;
+}
+
+.form-fallback {
+  color: var(--teal);
+  font-size: 14px;
+  font-weight: 700;
+  width: max-content;
+}
+
+.form-fallback:hover {
+  color: var(--lime);
 }
 
 .footer {
