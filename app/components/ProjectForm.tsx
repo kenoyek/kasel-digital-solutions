@@ -71,13 +71,22 @@ export default function ProjectForm() {
         },
         method: "POST",
       });
-      const result = (await response.json()) as { message?: string };
+      const responseText = await response.text();
+      let result: { message?: string } = {};
+
+      if (responseText) {
+        try {
+          result = JSON.parse(responseText) as { message?: string };
+        } catch {
+          result = {};
+        }
+      }
 
       if (!response.ok) {
         throw new Error(result.message ?? "The enquiry could not be sent.");
       }
 
-      setStatus("Your project enquiry has been sent.");
+      setStatus(result.message ?? "Your project enquiry has been sent.");
       event.currentTarget.reset();
     } catch {
       setFallbackUrl(mailtoUrl);
