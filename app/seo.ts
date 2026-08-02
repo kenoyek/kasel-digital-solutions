@@ -64,10 +64,7 @@ export const sharedMetadata: Metadata = {
     images: [SOCIAL_IMAGE],
   },
   icons: {
-    icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon.png", type: "image/png" },
-    ],
+    icon: "/favicon.png",
     shortcut: "/favicon.png",
     apple: "/favicon.png",
   },
