@@ -1,229 +1,261 @@
-import Image from "next/image";
-import { professionalServiceJsonLd, websiteJsonLd } from "./seo";
+import KaselMark from "./components/KaselMark";
+import PrecisionOrb from "./components/PrecisionOrb";
+import ProjectForm from "./components/ProjectForm";
+import SiteHeader from "./components/SiteHeader";
+import { WHATSAPP_URL } from "./components/WhatsAppButton";
+import {
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  serviceCatalogJsonLd,
+  websiteJsonLd,
+} from "./seo";
 
-const services = [
-  [
-    "01",
-    "Web & Mobile Development",
-    "Websites, React and Node.js applications, Flutter mobile apps and digital platforms built to perform.",
-  ],
-  [
-    "02",
-    "UI/UX & Brand Design",
-    "Product experiences, visual identities and design systems that are clear, useful and memorable.",
-  ],
-  [
-    "03",
-    "Video & Digital Content",
-    "Brand videos, motion graphics and digital campaigns designed to capture attention and inspire action.",
-  ],
-  [
-    "04",
-    "Digital Transformation",
-    "Automation, platform modernisation, AI integration and technical consulting that unlock growth.",
-  ],
+const capabilities = [
+  {
+    name: "Product Engineering",
+    services: "Web applications, mobile applications, cloud solutions",
+    problem:
+      "Teams need dependable digital products that work across devices, scale with demand and remain maintainable after launch.",
+    deliverables:
+      "Kasel plans, designs and builds responsive web platforms, mobile apps and cloud-backed systems with clear technical foundations.",
+  },
+  {
+    name: "Experience and Brand",
+    services: "UI/UX design, brand design, video and digital content",
+    problem:
+      "Customers judge trust and quality quickly. Weak interfaces, unclear journeys and inconsistent visuals make that trust harder to earn.",
+    deliverables:
+      "Kasel creates product interfaces, identity systems and digital content that make offers easier to understand, use and remember.",
+  },
+  {
+    name: "Automation and Intelligence",
+    services: "AI systems, workflow automation, data and analytics",
+    problem:
+      "Manual work, scattered tools and unclear reporting slow teams down and hide the signals leaders need to act.",
+    deliverables:
+      "Kasel connects workflows, introduces practical AI support and turns operational data into usable reporting and decision tools.",
+  },
+  {
+    name: "Digital Strategy",
+    services: "Digital transformation, IT strategy and consulting",
+    problem:
+      "Growing organisations need a practical technology direction before they invest in platforms, teams or new operating models.",
+    deliverables:
+      "Kasel clarifies priorities, maps systems and defines delivery plans that connect business goals to technical execution.",
+  },
 ];
 
-const steps = [
-  ["01", "Discover", "We clarify the opportunity, audience and goal."],
-  ["02", "Define", "We shape a focused strategy and delivery plan."],
-  ["03", "Design & Build", "We create, test and refine the right solution."],
-  ["04", "Launch & Grow", "We deploy, measure and support what comes next."],
+const builds = [
+  "Customer portals and booking platforms",
+  "Internal workflow and approval tools",
+  "Mobile apps for service delivery",
+  "Brand systems and product interfaces",
+  "Automation dashboards and AI-assisted operations",
+  "Cloud-ready data and reporting layers",
 ];
 
-const jsonLd = [websiteJsonLd, professionalServiceJsonLd];
+const process = [
+  ["Discover", "Clarify the business goal, users, constraints and success conditions before any production work begins."],
+  ["Define", "Turn the opportunity into a scoped plan, delivery sequence, technical direction and measurable priorities."],
+  ["Design", "Shape the product experience, interface system and content so the solution is clear before it is built."],
+  ["Build", "Develop, test and integrate the product with maintainable architecture and regular review points."],
+  ["Launch and improve", "Release the work, support adoption and refine it with performance, feedback and operational learning."],
+];
 
-const Mark = () => (
-  <span className="mark">
-    <b>KASEL</b>
-    <small>Digital Solutions Ltd</small>
-  </span>
-);
+const standards = [
+  "Responsive product development",
+  "Accessibility-minded interfaces",
+  "Performance-focused implementation",
+  "Maintainable architecture",
+  "Security-conscious delivery",
+  "Clear communication",
+  "Post-launch support",
+];
+
+const jsonLd = [
+  websiteJsonLd,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  serviceCatalogJsonLd,
+];
 
 export default function Home() {
   return (
-    <main>
+    <main id="top">
       <script
-        type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        type="application/ld+json"
       />
-      <header>
-        <a aria-label="KASEL Digital Solutions home" href="#top">
-          <Mark />
-        </a>
-        <nav aria-label="Primary navigation">
+      <SiteHeader />
+
+      <section aria-labelledby="hero-heading" className="hero">
+        <div className="hero__grid" aria-hidden="true" />
+        <div className="hero__content">
+          <p className="eyebrow">KASEL DIGITAL SOLUTIONS LTD</p>
+          <h1 id="hero-heading">Precision in Motion.</h1>
+          <p className="hero__lead">
+            We design and build digital products that help businesses work
+            better, serve customers and grow with confidence.
+          </p>
+          <div className="hero__actions">
+            <a className="button button--primary" href="#contact">
+              Start a project
+            </a>
+            <a className="button button--secondary" href="#services">
+              Explore our services
+            </a>
+          </div>
+        </div>
+        <div className="hero__orb">
+          <PrecisionOrb />
+        </div>
+      </section>
+
+      <section aria-labelledby="services-heading" className="section services" id="services">
+        <div className="section__header">
+          <p className="eyebrow">Services</p>
+          <h2 id="services-heading">Practical digital capability, grouped around business outcomes.</h2>
+          <p>
+            Kasel combines engineering, design, automation and strategy so each
+            engagement can move from idea to implementation without losing the
+            business context.
+          </p>
+        </div>
+
+        <div className="capability-list">
+          {capabilities.map((capability) => (
+            <article className="capability" key={capability.name}>
+              <div>
+                <p>{capability.services}</p>
+                <h3>{capability.name}</h3>
+              </div>
+              <dl>
+                <div>
+                  <dt>Problem</dt>
+                  <dd>{capability.problem}</dd>
+                </div>
+                <div>
+                  <dt>Client receives</dt>
+                  <dd>{capability.deliverables}</dd>
+                </div>
+              </dl>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section
+        aria-labelledby="capabilities-heading"
+        className="section capability-builds"
+        id="capabilities"
+      >
+        <div className="section__header section__header--split">
+          <div>
+            <p className="eyebrow">Selected capabilities</p>
+            <h2 id="capabilities-heading">What we can build with you.</h2>
+          </div>
+          <p>
+            No publishable case studies were present in the repository, so this
+            section avoids fictional client work and focuses on buildable,
+            relevant outcomes.
+          </p>
+        </div>
+        <ul className="build-grid">
+          {builds.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section aria-labelledby="about-heading" className="section about" id="about">
+        <div className="about__content">
+          <p className="eyebrow">About Kasel</p>
+          <h2 id="about-heading">Digital products should improve how the business actually works.</h2>
+          <p className="lead">
+            KASEL DIGITAL SOLUTIONS LTD helps startups, growing companies and
+            established organisations turn practical needs into useful digital
+            systems.
+          </p>
+          <p>
+            The work sits where strategy, product design and implementation meet:
+            clearer customer experiences, stronger operational tools and
+            technology decisions that can be explained.
+          </p>
+        </div>
+        <aside className="standards" aria-labelledby="standards-heading">
+          <p className="eyebrow">Trust and standards</p>
+          <h3 id="standards-heading">How the work is held.</h3>
+          <ul>
+            {standards.map((standard) => (
+              <li key={standard}>{standard}</li>
+            ))}
+          </ul>
+        </aside>
+      </section>
+
+      <section aria-labelledby="process-heading" className="section process" id="process">
+        <div className="section__header">
+          <p className="eyebrow">Process</p>
+          <h2 id="process-heading">A clear path from discovery to improvement.</h2>
+        </div>
+        <ol className="process-list">
+          {process.map(([name, description]) => (
+            <li key={name}>
+              <span>{name}</span>
+              <p>{description}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section aria-labelledby="contact-heading" className="section contact" id="contact">
+        <div className="contact__intro">
+          <p className="eyebrow">Start a conversation</p>
+          <h2 id="contact-heading">Have a product to build or a process to improve?</h2>
+          <p>
+            Share the shape of the work. Kasel will respond with the clearest
+            next step for your product, workflow or digital operation.
+          </p>
+          <div className="contact__actions">
+            <a className="button button--primary" href="mailto:hello@kasel.digital?subject=Project%20enquiry%20for%20KASEL%20Digital%20Solutions">
+              Email Kasel
+            </a>
+            <a className="button button--secondary" href={WHATSAPP_URL} rel="noopener noreferrer" target="_blank">
+              Chat on WhatsApp
+            </a>
+          </div>
+        </div>
+        <ProjectForm />
+      </section>
+
+      <footer className="footer">
+        <div>
+          <a aria-label="KASEL Digital Solutions home" href="#top">
+            <KaselMark />
+          </a>
+          <p>
+            Practical digital products, customer experiences and operational
+            systems built with precision.
+          </p>
+        </div>
+        <nav aria-label="Footer navigation">
           <a href="#services">Services</a>
+          <a href="#capabilities">Capabilities</a>
           <a href="#about">About</a>
           <a href="#process">Process</a>
           <a href="#contact">Contact</a>
         </nav>
-        <a className="talk" href="#contact">
-          Let&apos;s talk ↗
-        </a>
-      </header>
-
-      <section className="hero" id="top">
-        <div className="grid" />
-        <div className="copy">
-          <p className="tag">— Strategy · Design · Technology</p>
-          <h1>
-            Build smarter.
-            <br />
-            Move faster.
-            <br />
-            <em>Stand out.</em>
-          </h1>
-          <p>
-            We create high-performing websites and mobile apps, intuitive brand
-            experiences, compelling digital content, and practical technology
-            solutions that help businesses grow.
-          </p>
-          <div className="buttons">
-            <a className="btn green" href="#contact">
-              Book a consultation ↗
-            </a>
-            <a className="btn outline" href="#services">
-              Our capabilities ↓
-            </a>
-          </div>
-        </div>
-        <div className="art">
-          <div />
-          <Image
-            alt="KASEL Digital Solutions orb logo"
-            height={650}
-            priority
-            src="/kasel-logo.png"
-            width={650}
-          />
-        </div>
-      </section>
-
-      <section className="section services" id="services">
-        <div className="intro">
-          <p className="tag">— What we do</p>
-          <h2>
-            End-to-end digital expertise.
-            <br />
-            <em>One focused partner.</em>
-          </h2>
-          <p>
-            From the first idea to launch and beyond, we combine strategy,
-            creativity and engineering to deliver work that performs.
-          </p>
-        </div>
-        <div className="cards">
-          {services.map((service) => (
-            <article key={service[0]}>
-              <div>
-                <span>{service[0]}</span>
-                <i>↗</i>
-              </div>
-              <h3>{service[1]}</h3>
-              <p>{service[2]}</p>
-              <a href="#contact">
-                Discuss {service[1]} <b>→</b>
-              </a>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section about" id="about">
-        <div>
-          <p className="tag">— About Kasel</p>
-          <h2>
-            Technology should move your business <em>forward.</em>
-          </h2>
-          <p className="lead">
-            Kasel Digital Solutions Ltd is a multidisciplinary digital company
-            helping ambitious organisations turn ideas into useful, beautiful
-            and scalable solutions.
-          </p>
-          <p>
-            We work at the intersection of business strategy, technology and
-            creative communication. That means fewer hand-offs, clearer thinking
-            and solutions designed around the full picture.
-          </p>
-          <a className="link" href="#contact">
-            Build something with us ↗
+        <address>
+          <a href="mailto:hello@kasel.digital">hello@kasel.digital</a>
+          <a href="https://www.instagram.com/kasel.digital/" rel="noopener noreferrer" target="_blank">
+            Instagram @kasel.digital
           </a>
-        </div>
-        <aside>
-          <small>OUR STANDARD</small>
-          <blockquote>
-            Clear thinking.
-            <br />
-            Excellent execution.
-            <br />
-            <em>Measurable impact.</em>
-          </blockquote>
-          {[
-            ["01", "Clarity first"],
-            ["02", "Built with purpose"],
-            ["03", "Ready to grow"],
-          ].map((value) => (
-            <p className="value" key={value[0]}>
-              <span>{value[0]}</span>
-              <b>{value[1]}</b>
-            </p>
-          ))}
-        </aside>
-      </section>
-
-      <section className="section process" id="process">
-        <p className="tag">— How we work</p>
-        <h2>
-          A clear path from
-          <br />
-          <em>ambition to impact.</em>
-        </h2>
-        <div className="steps">
-          {steps.map((step) => (
-            <article key={step[0]}>
-              <span>{step[0]}</span>
-              <h3>{step[1]}</h3>
-              <p>{step[2]}</p>
-              <i>↗</i>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section contact" id="contact">
-        <p className="tag">— Start a conversation</p>
-        <h2>
-          Have an idea worth
-          <br />
-          <em>building?</em>
-        </h2>
-        <p>
-          Tell us what you are working on. We&apos;ll help you find the clearest
-          path from idea to launch.
-        </p>
-        <a
-          className="btn green"
-          href="mailto:hello@kasel.digital?subject=Project%20Enquiry"
-        >
-          Start your project ↗
-        </a>
-        <small>
-          Prefer email? <a href="mailto:hello@kasel.digital">hello@kasel.digital</a>{" "}
-          · Call <a href="tel:+2347075042166">+234 707 504 2166</a>
-        </small>
-      </section>
-
-      <footer>
-        <Mark />
-        <p>Digital products, experiences and content built to move businesses forward.</p>
-        <div>
-          <a href="#services">Services</a>
-          <a href="#about">About</a>
-          <a href="#process">Process</a>
-          <a href="#contact">Contact</a>
-        </div>
-        <small>© 2026 Kasel Digital Solutions Ltd. All rights reserved.</small>
-        <a href="#top">Back to top ↑</a>
+          <a href={WHATSAPP_URL} rel="noopener noreferrer" target="_blank">
+            WhatsApp
+          </a>
+          <a href="https://www.kasel.digital">www.kasel.digital</a>
+        </address>
+        <small>© 2026 KASEL DIGITAL SOLUTIONS LTD. All rights reserved.</small>
       </footer>
     </main>
   );

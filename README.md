@@ -2,15 +2,22 @@
 
 Official company website for **KASEL DIGITAL SOLUTIONS LTD**.
 
-The responsive single-page website showcases the company’s core services:
+Website: <https://www.kasel.digital>
+
+The responsive single-page website showcases the company’s core capabilities:
 
 - Web and mobile development
 - UI/UX and brand design
+- AI and workflow automation
+- Cloud solutions
+- Data and analytics
 - Video and digital content
+- IT strategy and consulting
 - Digital transformation
 
 ## Technology
 
+- Next.js 16
 - React 19
 - TypeScript
 - Vinext / Vite
@@ -33,12 +40,21 @@ Open the local address displayed in the terminal.
 npm run build
 ```
 
+## Validation
+
+```bash
+npm run lint
+npx tsc --noEmit
+npm test
+```
+
 ## Main files
 
 - `app/page.tsx` – webpage content and structure
 - `app/globals.css` – styling and responsive layouts
 - `app/layout.tsx` – page metadata and shared layout
-- `public/kasel-logo.png` – hero artwork
+- `app/components/PrecisionOrb.tsx` – animated hero orb experience
+- `public/kasel-orb.png` – primary orb artwork
 
 ## Before publishing
 

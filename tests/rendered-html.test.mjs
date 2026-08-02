@@ -43,10 +43,10 @@ test("renders homepage SEO metadata server-side", async () => {
   assert.match(html, /<title>KASEL Digital Solutions \| Precision in Motion<\/title>/i);
   assert.match(
     html,
-    /<meta(?=[^>]*\bname="description")(?=[^>]*\bcontent="KASEL Digital Solutions builds high-performing websites, digital products, brands and automation systems that help businesses move faster and grow\.")[^>]*>/i,
+    /<meta(?=[^>]*\bname="description")(?=[^>]*\bcontent="KASEL Digital Solutions designs and builds practical digital products, automation systems and customer experiences for businesses ready to work better\.")[^>]*>/i,
   );
-  assert.match(html, /<link(?=[^>]*\brel="canonical")(?=[^>]*\bhref="https:\/\/kaseldigitalsolutions\.com\/?")[^>]*>/i);
-  assert.match(html, /<meta(?=[^>]*\bproperty="og:image")(?=[^>]*\bcontent="https:\/\/kaseldigitalsolutions\.com\/kasel-social-preview\.png")[^>]*>/i);
+  assert.match(html, /<link(?=[^>]*\brel="canonical")(?=[^>]*\bhref="https:\/\/www\.kasel\.digital\/?")[^>]*>/i);
+  assert.match(html, /<meta(?=[^>]*\bproperty="og:image")(?=[^>]*\bcontent="https:\/\/www\.kasel\.digital\/kasel-social-preview\.png")[^>]*>/i);
   assert.match(html, /<meta(?=[^>]*\bname="twitter:card")(?=[^>]*\bcontent="summary_large_image")[^>]*>/i);
   assert.doesNotMatch(html, /<meta(?=[^>]*\bname="robots")(?=[^>]*\bcontent="[^"]*noindex)/i);
   assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
@@ -59,18 +59,18 @@ test("renders homepage SEO metadata server-side", async () => {
   const jsonLd = JSON.parse(jsonLdMatch[1]);
   assert.deepEqual(
     jsonLd.map((entry) => entry["@type"]),
-    ["WebSite", "ProfessionalService"],
+    ["WebSite", "Organization", "ProfessionalService", "ItemList"],
   );
 });
 
 test("serves crawl files and custom 404", async () => {
   const robots = await fetchFromWorker("/robots.txt", "*/*");
   assert.equal(robots.status, 200);
-  assert.match(await robots.text(), /Sitemap: https:\/\/kaseldigitalsolutions\.com\/sitemap\.xml/);
+  assert.match(await robots.text(), /Sitemap: https:\/\/www\.kasel\.digital\/sitemap\.xml/);
 
   const sitemap = await fetchFromWorker("/sitemap.xml", "*/*");
   assert.equal(sitemap.status, 200);
-  assert.match(await sitemap.text(), /<loc>https:\/\/kaseldigitalsolutions\.com<\/loc>/);
+  assert.match(await sitemap.text(), /<loc>https:\/\/www\.kasel\.digital<\/loc>/);
 
   const missing = await fetchFromWorker("/missing-page");
   assert.equal(missing.status, 404);

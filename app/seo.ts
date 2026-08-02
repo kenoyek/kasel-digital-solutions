@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
-export const SITE_URL = "https://kaseldigitalsolutions.com";
+export const SITE_URL = "https://www.kasel.digital";
 export const SITE_NAME = "KASEL Digital Solutions";
 export const BUSINESS_NAME = "KASEL DIGITAL SOLUTIONS LTD";
 export const HOME_TITLE = "KASEL Digital Solutions | Precision in Motion";
 export const HOME_DESCRIPTION =
-  "KASEL Digital Solutions builds high-performing websites, digital products, brands and automation systems that help businesses move faster and grow.";
+  "KASEL Digital Solutions designs and builds practical digital products, automation systems and customer experiences for businesses ready to work better.";
 export const SOCIAL_IMAGE = "/kasel-social-preview.png";
 
 export const principalServices = [
@@ -64,7 +64,10 @@ export const sharedMetadata: Metadata = {
     images: [SOCIAL_IMAGE],
   },
   icons: {
-    icon: "/favicon.png",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.png", type: "image/png" },
+    ],
     shortcut: "/favicon.png",
     apple: "/favicon.png",
   },
@@ -88,6 +91,19 @@ export const websiteJsonLd = {
   },
 };
 
+export const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: BUSINESS_NAME,
+  alternateName: SITE_NAME,
+  url: SITE_URL,
+  logo: `${SITE_URL}/kasel-orb.png`,
+  image: `${SITE_URL}${SOCIAL_IMAGE}`,
+  email: "hello@kasel.digital",
+  telephone: "+2347075042166",
+  sameAs: ["https://www.instagram.com/kasel.digital/"],
+};
+
 export const professionalServiceJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
@@ -97,7 +113,7 @@ export const professionalServiceJsonLd = {
   image: `${SITE_URL}${SOCIAL_IMAGE}`,
   slogan: "Precision in Motion",
   description:
-    "KASEL Digital Solutions helps businesses build smarter, move faster, and stand out through practical digital solutions.",
+    "KASEL Digital Solutions helps businesses build practical digital products, improve customer experiences and modernise operations.",
   email: "hello@kasel.digital",
   telephone: "+2347075042166",
   makesOffer: {
@@ -116,4 +132,23 @@ export const professionalServiceJsonLd = {
       },
     })),
   },
+};
+
+export const serviceCatalogJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "KASEL Digital Solutions service catalog",
+  itemListElement: principalServices.map((service, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "Service",
+      name: service,
+      provider: {
+        "@type": "Organization",
+        name: BUSINESS_NAME,
+        url: SITE_URL,
+      },
+    },
+  })),
 };
