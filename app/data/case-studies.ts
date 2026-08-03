@@ -172,6 +172,12 @@ export const caseStudies: CaseStudy[] = [
     ],
     outcome:
       "Asele gives users a structured and private way to track their cycle, recognise personal health patterns and receive timely wellness reminders.",
+    websiteLinks: [
+      {
+        label: "Visit Asele",
+        url: "https://www.asele.health",
+      },
+    ],
     relatedSlugs: ["1vet", "reframe"],
     visualAlt:
       "Designed mobile interface preview representing Asele cycle tracking, reminders and private wellness records.",

@@ -183,6 +183,7 @@ test("renders selected work and case study pages without placeholder commentary"
   assert.match(work, /Digital Products Built by Kasel/);
   assert.match(work, /href="https:\/\/teacheasylms\.com"/);
   assert.match(work, /href="https:\/\/1vet\.store"/);
+  assert.match(work, /href="https:\/\/www\.asele\.health"/);
   assert.match(work, /href="https:\/\/reframe\.network"/);
   assert.match(work, /href="https:\/\/community\.reframe\.network"/);
   assert.match(work, /CreativeWork/);
