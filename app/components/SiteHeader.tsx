@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import KaselMark from "./KaselMark";
 
 const links = [
-  ["Services", "#services"],
-  ["Capabilities", "#capabilities"],
-  ["About", "#about"],
-  ["Process", "#process"],
-  ["Contact", "#contact"],
+  ["Services", "/#services"],
+  ["Work", "/work"],
+  ["Process", "/#process"],
+  ["About", "/#about"],
+  ["Contact", "/#contact"],
 ];
 
 export default function SiteHeader() {
@@ -31,14 +32,14 @@ export default function SiteHeader() {
 
   return (
     <header className="site-header">
-      <a
+      <Link
         aria-label="KASEL Digital Solutions home"
         className="site-header__brand"
-        href="#top"
+        href="/"
         onClick={() => setOpen(false)}
       >
         <KaselMark />
-      </a>
+      </Link>
 
       <button
         aria-controls="primary-navigation"
@@ -58,15 +59,15 @@ export default function SiteHeader() {
         id="primary-navigation"
       >
         {links.map(([label, href]) => (
-          <a href={href} key={href} onClick={() => setOpen(false)}>
+          <Link href={href} key={href} onClick={() => setOpen(false)}>
             {label}
-          </a>
+          </Link>
         ))}
       </nav>
 
-      <a className="site-header__action" href="#contact">
+      <Link className="site-header__action" href="/#contact">
         Start a project
-      </a>
+      </Link>
     </header>
   );
 }

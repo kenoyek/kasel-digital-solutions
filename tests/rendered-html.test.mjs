@@ -71,7 +71,10 @@ test("serves crawl files and custom 404", async () => {
 
   const sitemap = await fetchFromWorker("/sitemap.xml", "*/*");
   assert.equal(sitemap.status, 200);
-  assert.match(await sitemap.text(), /<loc>https:\/\/www\.kasel\.digital<\/loc>/);
+  const sitemapXml = await sitemap.text();
+  assert.match(sitemapXml, /<loc>https:\/\/www\.kasel\.digital<\/loc>/);
+  assert.match(sitemapXml, /<loc>https:\/\/www\.kasel\.digital\/work<\/loc>/);
+  assert.match(sitemapXml, /<loc>https:\/\/www\.kasel\.digital\/work\/reframe<\/loc>/);
 
   const missing = await fetchFromWorker("/missing-page");
   assert.equal(missing.status, 404);
@@ -86,7 +89,12 @@ test("renders approved client logo carousel accessibly", async () => {
   assert.match(html, /Trusted by teams we(?:&#x27;|')ve helped move forward/);
   assert.match(html, /alt="Asele logo"/);
   assert.match(html, /alt="LearnEasy Academy logo"/);
-  assert.match(html, /alt="reframe logo"/);
+  assert.match(html, /alt="Reframe logo"/);
+  assert.match(html, /alt="Varifarms logo"/);
+  assert.match(html, /href="\/work\/teacheasy-lms"/);
+  assert.match(html, /href="\/work\/1vet"/);
+  assert.match(html, /href="\/work\/asele"/);
+  assert.match(html, /href="\/work\/reframe"/);
   assert.match(
     html,
     /<div aria-hidden="true" class="client-logo-carousel__set">/,
@@ -110,9 +118,12 @@ test("client carousel data and styles stay intentional", async () => {
     "/clients/asele.png",
     "/clients/learneasy-academy.png",
     "/clients/reframe-wordmark.png",
+    "/clients/varifarms.svg",
   ]) {
     assert.match(dataSource, new RegExp(`logo: "${logo}"`));
   }
+  assert.match(dataSource, /caseStudyHref: "\/work\/1vet"/);
+  assert.match(dataSource, /caseStudyHref: "\/work\/reframe"/);
 
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(css, /\.client-logo-carousel:hover \.client-logo-carousel__track/);
@@ -129,7 +140,7 @@ test("renders the premium footer with working links", async () => {
   assert.match(html, /<footer class="site-footer">/);
   assert.match(html, /LET(?:&apos;|&#x27;|'|’)S BUILD WITH PRECISION/);
   assert.match(html, /Have a product to build or a process to improve\?/);
-  assert.match(html, /href="#project-enquiry"/);
+  assert.match(html, /href="\/#project-enquiry"/);
   assert.match(html, /id="project-enquiry"/);
   assert.match(
     html,
@@ -154,4 +165,51 @@ test("renders the premium footer with working links", async () => {
   assert.doesNotMatch(html, />www\.kasel\.digital<\/a>/);
   assert.doesNotMatch(html, /Privacy Policy/);
   assert.doesNotMatch(html, /Terms of Use/);
+});
+
+test("renders selected work and case study pages without placeholder commentary", async () => {
+  const home = await (await fetchFromWorker("/")).text();
+  assert.match(home, /Selected Work/);
+  assert.match(home, /TeachEasy LMS/);
+  assert.match(home, /1Vet/);
+  assert.match(home, /Asele/);
+  assert.match(home, /Reframe/);
+  assert.match(home, /href="\/work\/teacheasy-lms"/);
+  assert.match(home, /href="\/work\/reframe"/);
+  assert.doesNotMatch(home, /No publishable case studies/i);
+  assert.doesNotMatch(home, /repository/i);
+
+  const work = await (await fetchFromWorker("/work")).text();
+  assert.match(work, /Digital Products Built by Kasel/);
+  assert.match(work, /href="https:\/\/teacheasylms\.com"/);
+  assert.match(work, /href="https:\/\/1vet\.store"/);
+  assert.match(work, /href="https:\/\/reframe\.network"/);
+  assert.match(work, /href="https:\/\/community\.reframe\.network"/);
+  assert.match(work, /CreativeWork/);
+
+  for (const [path, title] of [
+    ["/work/teacheasy-lms", "TeachEasy LMS Case Study"],
+    ["/work/1vet", "1Vet Case Study"],
+    ["/work/asele", "Asele Case Study"],
+    ["/work/reframe", "Reframe Case Study"],
+  ]) {
+    const response = await fetchFromWorker(path);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.match(html, new RegExp(title));
+    assert.match(html, /BreadcrumbList/);
+    assert.match(html, /CreativeWork/);
+    assert.match(html, /Start a project/);
+    assert.match(html, /Related Projects/);
+    assert.doesNotMatch(html, /reduced administrative work by 70%/i);
+  }
+
+  const reframe = await (await fetchFromWorker("/work/reframe")).text();
+  assert.match(reframe, /Bringing Reframe(?:&#x27;|')s community platform to mobile/);
+  assert.match(reframe, /API and platform integration/);
+  assert.match(reframe, /Authentication and deep-link work/);
+  assert.match(reframe, /Application branding and icon system/);
+  assert.match(reframe, /Explore the Reframe Community/);
+  assert.doesNotMatch(reframe, /App Store availability/i);
+  assert.doesNotMatch(reframe, /Google Play availability/i);
 });

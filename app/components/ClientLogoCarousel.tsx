@@ -13,32 +13,43 @@ function ClientLogo({
   client: Client;
   duplicate?: boolean;
 }) {
-  const dimensions = clientLogoDimensions[client.logo];
-  const image = (
+  const logoKind = client.logoKind ?? (client.logo ? "wordmark" : "text");
+  const image = client.logo ? (
     <Image
       alt={duplicate ? "" : `${client.name} logo`}
       className="client-logo-carousel__image"
-      height={dimensions.height}
+      height={clientLogoDimensions[client.logo].height}
       loading="lazy"
       src={client.logo}
       unoptimized
-      width={dimensions.width}
+      width={clientLogoDimensions[client.logo].width}
     />
+  ) : (
+    <span
+      aria-label={duplicate ? undefined : `${client.name} logo`}
+      className="client-logo-carousel__text-mark"
+      role={duplicate ? undefined : "img"}
+    >
+      {client.displayName ?? client.name}
+    </span>
+  );
+  const content = (
+    <span className={`client-logo-carousel__frame client-logo-carousel__frame--${logoKind}`}>
+      {image}
+    </span>
   );
 
-  if (!client.website) {
-    return <span className="client-logo-carousel__item">{image}</span>;
+  if (duplicate) {
+    return <span className="client-logo-carousel__item">{content}</span>;
   }
 
   return (
     <a
-      aria-label={`Visit ${client.name}`}
+      aria-label={`View ${client.name} case study`}
       className="client-logo-carousel__item"
-      href={client.website}
-      rel="noopener noreferrer"
-      target="_blank"
+      href={client.caseStudyHref}
     >
-      {image}
+      {content}
     </a>
   );
 }

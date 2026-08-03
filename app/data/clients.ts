@@ -1,7 +1,9 @@
 export type Client = {
+  caseStudyHref: string;
+  displayName?: string;
+  logoKind?: "icon" | "text" | "wordmark";
   name: string;
-  logo: string;
-  website?: string;
+  logo?: string;
 };
 
 export const CLIENT_LOGO_CAROUSEL_ENABLED = true;
@@ -10,15 +12,29 @@ export const CLIENT_LOGO_CAROUSEL_ENABLED = true;
 // Add future clients here only when their name and logo asset are approved.
 export const clients: Client[] = [
   {
-    name: "Asele",
-    logo: "/clients/asele.png",
-  },
-  {
+    caseStudyHref: "/work/teacheasy-lms",
+    displayName: "LearnEasy",
+    logoKind: "wordmark",
     name: "LearnEasy Academy",
     logo: "/clients/learneasy-academy.png",
   },
   {
-    name: "reframe",
+    caseStudyHref: "/work/1vet",
+    displayName: "Varifarms",
+    logoKind: "wordmark",
+    name: "Varifarms",
+    logo: "/clients/varifarms.svg",
+  },
+  {
+    caseStudyHref: "/work/asele",
+    logoKind: "icon",
+    name: "Asele",
+    logo: "/clients/asele.png",
+  },
+  {
+    caseStudyHref: "/work/reframe",
+    logoKind: "wordmark",
+    name: "Reframe",
     logo: "/clients/reframe-wordmark.png",
   },
 ];
@@ -38,5 +54,9 @@ export const clientLogoDimensions: Record<
   "/clients/reframe-wordmark.png": {
     height: 170,
     width: 720,
+  },
+  "/clients/varifarms.svg": {
+    height: 543,
+    width: 3157,
   },
 };
