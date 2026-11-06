@@ -2562,9 +2562,9 @@ h3 { letter-spacing: -.025em; }
 .project-showcase__device { overflow: hidden; box-shadow: 0 20px 38px #1c243d25, 0 3px 8px #1c243d15; background: #fff; max-width: 100%; }
 .project-showcase__device img { display: block; width: 100%; height: auto; }
 .project-showcase__stage--phone .project-showcase__device { width: 184px; border: 5px solid #242b30; border-radius: 28px; }
-.project-showcase__stage--phone .project-showcase__device img { aspect-ratio: 591 / 1280; object-fit: cover; object-position: top; }
+.project-showcase__stage--phone .project-showcase__device img { height: auto; object-fit: contain; }
 .project-showcase__stage--browser .project-showcase__device { width: min(100%, 430px); border: 1px solid #b5c0cd; border-radius: 8px; }
-.project-showcase__stage--browser .project-showcase__device img { height: 350px; object-fit: cover; object-position: top; }
+.project-showcase__stage--browser .project-showcase__device img { height: auto; object-fit: contain; }
 .project-showcase__chrome { height: 28px; display: flex; align-items: center; gap: 4px; padding: 0 10px; background: #f5f7f9; border-bottom: 1px solid #d5dce1; }
 .project-showcase__chrome i { height: 5px; width: 5px; border-radius: 50%; background: #a1abb6; }
 .project-showcase__chrome span { margin-inline: auto; padding-right: 25px; font: 9px ui-monospace, monospace; color: #576572; }
@@ -2579,7 +2579,6 @@ h3 { letter-spacing: -.025em; }
   .project-showcase__tabs button { font-size: 10px; padding-inline: 9px; }
   .project-showcase__stage { min-height: 460px; padding: 25px 16px 20px; }
   .project-showcase__stage--phone .project-showcase__device { width: 166px; border-radius: 25px; }
-  .project-showcase__stage--browser .project-showcase__device img { height: 310px; }
   .project-showcase__copy { padding: 20px; }
   .project-showcase__copy p { font-size: 17px; }
 }

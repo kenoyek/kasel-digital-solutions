@@ -64,7 +64,7 @@ export default function ProjectShowcase({ name, slug, compact = false }: {
                     <i /><i /><i /><span>{slug === "teacheasy-lms" ? "teacheasylms.com" : "reframe.network"}</span>
                   </div>
                 )}
-                <Image alt={item.alt} src={item.src} width={item.format === "phone" ? 591 : 720} height={item.format === "phone" ? 1280 : 900} unoptimized />
+                <Image alt={item.alt} src={item.src} width={item.width} height={item.height} unoptimized />
               </div>
               <figcaption>{item.label}<span>{item.format === "phone" ? "Mobile app" : "Public website"}</span></figcaption>
             </figure>
