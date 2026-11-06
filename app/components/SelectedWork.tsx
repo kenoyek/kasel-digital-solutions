@@ -12,13 +12,13 @@ export default function SelectedWork({ showHeaderLink = true }: { showHeaderLink
       <div className="section__header section__header--split">
         <div>
           <p className="eyebrow">Selected Work</p>
-          <h2 id="selected-work-heading">Digital products built around real operational, customer and growth challenges.</h2>
+          <h2 id="selected-work-heading">Real challenges.
+            Purposeful digital products.</h2>
         </div>
         {showHeaderLink && (
           <p>
-            Explore verified product work across education technology, veterinary
-            care, women&apos;s health and community technology, with each case
-            study focused on confirmed scope and practical platform value.
+            From learning platforms to better access to care. Explore the products
+            we’ve helped teams bring to life.
           </p>
         )}
       </div>
@@ -32,22 +32,12 @@ export default function SelectedWork({ showHeaderLink = true }: { showHeaderLink
             <div className="work-feature__content">
               <p className="case-kicker">{caseStudy.category}</p>
               <h3>{caseStudy.name}</h3>
-              <p className="case-meta">Client/Product: {caseStudy.client}</p>
+
               <p>{caseStudy.summary}</p>
-              <ul className="case-capabilities" aria-label={`${caseStudy.name} key capabilities`}>
-                {caseStudy.capabilities.slice(0, 5).map((capability) => (
-                  <li key={capability}>{capability}</li>
-                ))}
-              </ul>
               <ProjectTagList
                 items={caseStudy.services.slice(0, 4)}
                 label={`${caseStudy.name} services`}
                 variant="service"
-              />
-              <ProjectTagList
-                items={caseStudy.technologies.slice(0, 5)}
-                label={`${caseStudy.name} technologies`}
-                variant="technology"
               />
               <div className="case-actions">
                 <Link className="button button--primary" href={`/work/${caseStudy.slug}`}>
@@ -76,22 +66,12 @@ export default function SelectedWork({ showHeaderLink = true }: { showHeaderLink
               <div className="work-card__body">
                 <p className="case-kicker">{caseStudy.category}</p>
                 <h3>{caseStudy.name}</h3>
-                <p className="case-meta">Client/Product: {caseStudy.client}</p>
+
                 <p>{caseStudy.summary}</p>
-                <ul className="case-capabilities" aria-label={`${caseStudy.name} key capabilities`}>
-                  {caseStudy.capabilities.slice(0, 4).map((capability) => (
-                    <li key={capability}>{capability}</li>
-                  ))}
-                </ul>
                 <ProjectTagList
                   items={caseStudy.services.slice(0, 3)}
                   label={`${caseStudy.name} services`}
                   variant="service"
-                />
-                <ProjectTagList
-                  items={caseStudy.technologies.slice(0, 4)}
-                  label={`${caseStudy.name} technologies`}
-                  variant="technology"
                 />
                 <div className="case-actions">
                   <Link className="button button--secondary" href={`/work/${caseStudy.slug}`}>
@@ -113,6 +93,7 @@ export default function SelectedWork({ showHeaderLink = true }: { showHeaderLink
           ))}
         </div>
       </div>
+      {showHeaderLink && <Link className="text-link selected-work__all" href="/work">Explore all projects <span aria-hidden="true" className="arrow-icon" /></Link>}
     </section>
   );
 }

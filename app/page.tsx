@@ -79,59 +79,60 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         type="application/ld+json"
       />
+      <a className="skip-link" href="#hero-heading">Skip to content</a>
       <SiteHeader />
 
       <section aria-labelledby="hero-heading" className="hero">
         <div className="hero__grid" aria-hidden="true" />
         <div className="hero__content">
-          <p className="eyebrow">KASEL DIGITAL SOLUTIONS LTD</p>
-          <h1 id="hero-heading">Precision in Motion.</h1>
+          <p className="eyebrow">Strategy. Design. Engineering.</p>
+          <h1 id="hero-heading">Precision<br /><span>in Motion.</span></h1>
           <p className="hero__lead">
-            We design and build digital products that help businesses work
-            better, serve customers and grow with confidence.
+            From the first idea to the next chapter. We bring design, engineering
+            and practical intelligence together to move your business forward.
           </p>
           <div className="hero__actions">
-            <a className="button button--primary" href="#contact">
-              Start a project
+            <a className="button button--primary" href="#project-enquiry">
+              Start a project <span aria-hidden="true" className="arrow-icon" />
             </a>
             <a className="button button--secondary" href="#selected-work">
-              View our work
+              Explore our work <span aria-hidden="true" className="arrow-icon" />
             </a>
           </div>
+        <p className="hero__note">Built for people. Engineered for what’s next.</p>
         </div>
         <div className="hero__orb">
+          <span className="hero__orbit-label">IDEAS INTO IMPACT</span>
           <PrecisionOrb />
+          <div className="hero__disciplines"><span>Design with purpose</span><span>Build with precision</span></div>
         </div>
       </section>
+
+      <ClientLogoCarousel />
 
       <section aria-labelledby="services-heading" className="section services" id="services">
         <div className="section__header">
           <p className="eyebrow">Services</p>
-          <h2 id="services-heading">Practical digital capability, grouped around business outcomes.</h2>
+          <h2 id="services-heading">Good ideas deserve<br />great execution.</h2>
           <p>
-            Kasel combines engineering, design, automation and strategy so each
-            engagement can move from idea to implementation without losing the
-            business context.
+            One partner for the full picture. We connect business thinking with
+            thoughtful design and dependable technology.
           </p>
         </div>
 
         <div className="capability-list">
           {capabilities.map((capability) => (
             <article className="capability" key={capability.name}>
-              <div>
-                <p>{capability.services}</p>
+              <div className="capability__intro">
                 <h3>{capability.name}</h3>
+                <p>{capability.services}</p>
               </div>
-              <dl>
-                <div>
-                  <dt>Problem</dt>
-                  <dd>{capability.problem}</dd>
-                </div>
-                <div>
-                  <dt>Client receives</dt>
-                  <dd>{capability.deliverables}</dd>
-                </div>
-              </dl>
+              <p className="capability__description">{capability.deliverables}</p>
+              <details className="capability__details">
+                <summary>When we can help <span aria-hidden="true">+</span></summary>
+                <p>{capability.problem}</p>
+              </details>
+              <a className="text-link" href="#project-enquiry">Let’s talk <span aria-hidden="true" className="arrow-icon" /></a>
             </article>
           ))}
         </div>
@@ -142,7 +143,7 @@ export default function Home() {
       <section aria-labelledby="process-heading" className="section process" id="process">
         <div className="section__header">
           <p className="eyebrow">Process</p>
-          <h2 id="process-heading">A clear path from discovery to improvement.</h2>
+          <h2 id="process-heading">Clarity at every step.</h2>
         </div>
         <ol className="process-list">
           {process.map(([name, description]) => (
@@ -174,12 +175,10 @@ export default function Home() {
         <ProjectForm />
       </section>
 
-      <ClientLogoCarousel />
-
       <section aria-labelledby="about-heading" className="section about" id="about">
         <div className="about__content">
           <p className="eyebrow">About Kasel</p>
-          <h2 id="about-heading">Digital products should improve how the business actually works.</h2>
+          <h2 id="about-heading">Thoughtful by design.<br />Practical by nature.</h2>
           <p className="lead">
             KASEL DIGITAL SOLUTIONS LTD helps startups, growing companies and
             established organisations turn practical needs into useful digital

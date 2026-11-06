@@ -43,6 +43,8 @@ export default function ProjectForm() {
 
     if (Object.keys(nextErrors).length > 0) {
       setStatus("Please fix the highlighted fields.");
+      const firstInvalid = Object.keys(nextErrors)[0];
+      form.querySelector<HTMLInputElement | HTMLTextAreaElement>(`[name="${firstInvalid}"]`)?.focus();
       return;
     }
 
@@ -99,7 +101,8 @@ export default function ProjectForm() {
 
   return (
     <form className="project-form" id="project-enquiry" noValidate onSubmit={handleSubmit}>
-      <label className="project-form__trap">
+      <div className="project-form__heading"><p className="eyebrow">Your next chapter</p><h3>Tell us what you have in mind.</h3><p>A few details are all we need to get started.</p></div>
+      <label className="project-form__trap" aria-hidden="true">
         <span>Website</span>
         <input autoComplete="off" name="website" tabIndex={-1} type="text" />
       </label>
@@ -128,7 +131,7 @@ export default function ProjectForm() {
         </label>
       </div>
       <label>
-        <span>Company</span>
+        <span>Company <em>(optional)</em></span>
         <input autoComplete="organization" name="company" type="text" />
       </label>
       <label>
@@ -137,12 +140,13 @@ export default function ProjectForm() {
           aria-describedby={errors.project ? "project-error" : undefined}
           aria-invalid={Boolean(errors.project)}
           name="project"
+          placeholder="What would you like to build or improve?"
           rows={5}
         />
         {errors.project && <small id="project-error">{errors.project}</small>}
       </label>
       <button className="button button--primary" disabled={isSubmitting} type="submit">
-        {isSubmitting ? "Sending enquiry" : "Start a project"}
+        {isSubmitting ? "Sending enquiry" : "Send project enquiry"}
       </button>
       <p aria-live="polite" className="form-status" role="status">
         {status}
