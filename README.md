@@ -68,4 +68,4 @@ The project enquiry form sends email through Resend. Configure these environment
 
 Confirm that `hello@kasel.digital` is the correct business email and `+2347075042166` is the correct phone number. They appear in the contact section and project enquiry links.
 
-© 2026 Kasel Digital Solutions Ltd.
+© 2026 Kasel Digital Solutions Ltd......
