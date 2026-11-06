@@ -1,3 +1,5 @@
+import ProjectShowcase from "./ProjectShowcase";
+import { projectExperiences } from "../data/project-experiences";
 import type { CSSProperties } from "react";
 import type { CaseStudy } from "../data/case-studies";
 
@@ -24,6 +26,10 @@ export default function CaseStudyVisual({
   caseStudy: CaseStudy;
   compact?: boolean;
 }) {
+  if (projectExperiences[caseStudy.slug]) {
+    return <ProjectShowcase name={caseStudy.name} slug={caseStudy.slug} compact={compact} />;
+  }
+
   const previewCapabilities = caseStudy.capabilities.slice(0, compact ? 3 : 4);
   const previewTechnologies = caseStudy.technologies.slice(0, compact ? 3 : 4);
 

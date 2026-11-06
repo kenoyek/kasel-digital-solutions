@@ -214,3 +214,20 @@ test("renders selected work and case study pages without placeholder commentary"
   assert.doesNotMatch(reframe, /App Store availability/i);
   assert.doesNotMatch(reframe, /Google Play availability/i);
 });
+
+test("showcases original portfolio imagery with accessible product-view controls", async () => {
+  const html = await (await fetchFromWorker("/")).text();
+  for (const [name, image] of [
+    ["Asele", "/images/projects/asele/asele-native-cycle-home.webp"],
+    ["Reframe", "/images/projects/reframe/reframe-native-feed.webp"],
+    ["TeachEasy LMS", "/images/projects/teacheasy/teacheasy-public-home-desktop.webp"],
+  ]) {
+    assert.ok(html.includes(`aria-label="${name} product views"`));
+    assert.ok(html.includes(`src="${image}"`));
+    const asset = await readFile(new URL(`../public${image}`, import.meta.url));
+    assert.equal(asset.toString("ascii", 8, 12), "WEBP");
+  }
+  assert.match(html, /role="tablist"/);
+  assert.match(html, /role="tabpanel"/);
+  assert.match(html, /aria-selected="true"/);
+});
