@@ -61,12 +61,12 @@ export default function ProjectShowcase({ name, slug, compact = false }: {
               <div className="project-showcase__device">
                 {item.format === "browser" && (
                   <div className="project-showcase__chrome" aria-hidden="true">
-                    <i /><i /><i /><span>{slug === "teacheasy-lms" ? "teacheasylms.com" : "reframe.network"}</span>
+                    <i /><i /><i /><span>{item.website ?? (slug === "teacheasy-lms" ? "teacheasylms.com" : "reframe.network")}</span>
                   </div>
                 )}
                 <Image alt={item.alt} src={item.src} width={item.width} height={item.height} unoptimized />
               </div>
-              <figcaption>{item.label}<span>{item.format === "phone" ? "Mobile app" : "Public website"}</span></figcaption>
+              <figcaption>{item.surfaceLabel ?? item.label}{!item.surfaceLabel && <span>{item.format === "phone" ? "Mobile app" : "Public website"}</span>}</figcaption>
             </figure>
           )}
         </div>

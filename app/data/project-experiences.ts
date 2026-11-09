@@ -9,9 +9,41 @@ export type ProductView = {
   format: "phone" | "browser";
   width: number;
   height: number;
+  website?: string;
+  surfaceLabel?: string;
 };
 
 export const projectExperiences: Record<string, ProductView[]> = {
+  "1vet": [
+    {
+      id: "desktop",
+      label: "Desktop website",
+      title: "A clearer path to animal care.",
+      description: "A welcoming public website connects pet owners and farmers with veterinary services and their next step in care.",
+      engineering: "Responsive web experience · Veterinary service discovery",
+      src: "/images/projects/1vet/1vet-public-home-desktop.jpg",
+      width: 1440,
+      height: 1000,
+      alt: "1Vet desktop homepage with veterinary care options and a veterinarian examining a cat.",
+      format: "browser",
+      website: "1vet.store",
+      surfaceLabel: "Desktop website",
+    },
+    {
+      id: "mobile",
+      label: "Mobile website",
+      title: "Care that meets you where you are.",
+      description: "The mobile website brings service discovery, care pathways and navigation into a clear experience for smaller screens.",
+      engineering: "Responsive mobile web · Touch-friendly navigation",
+      src: "/images/projects/1vet/1vet-public-home-mobile.jpg",
+      width: 390,
+      height: 1100,
+      alt: "1Vet mobile website showing care options, a veterinary consultation image and bottom navigation.",
+      format: "phone",
+      website: "1vet.store",
+      surfaceLabel: "Mobile website",
+    },
+  ],
   asele: [
     {
       id: "cycle",

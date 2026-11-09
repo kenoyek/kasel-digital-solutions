@@ -231,3 +231,19 @@ test("showcases original portfolio imagery with accessible product-view controls
   assert.match(html, /role="tabpanel"/);
   assert.match(html, /aria-selected="true"/);
 });
+
+test("presents 1Vet desktop and mobile web captures across work pages", async () => {
+  for (const path of ["/", "/work", "/work/1vet"]) {
+    const response = await fetchFromWorker(path);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.ok(html.includes('aria-label="1Vet product views"'));
+    assert.ok(html.includes('src="/images/projects/1vet/1vet-public-home-desktop.jpg"'));
+    assert.match(html, /1vet\.store/);
+    assert.match(html, />Mobile website<\/button>/);
+  }
+  for (const file of ["1vet-public-home-desktop.jpg", "1vet-public-home-mobile.jpg"]) {
+    const image = await readFile(new URL(`../public/images/projects/1vet/${file}`, import.meta.url));
+    assert.equal(image.readUInt16BE(0), 0xffd8);
+  }
+});
