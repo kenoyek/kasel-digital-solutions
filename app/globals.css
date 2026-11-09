@@ -2587,5 +2587,4 @@ h3 { letter-spacing: -.025em; }
 /* 1Vet: calm sage presentation for the desktop and responsive mobile website. */
 .project-showcase--1vet { --showcase-paper: #e9eee2; --showcase-line: #c4d1bd; --showcase-ink: #244638; }
 .project-showcase--1vet .project-showcase__stage--browser .project-showcase__device { width: min(100%, 520px); }
-.project-showcase--1vet .project-showcase__stage--phone .project-showcase__device { width: 172px; }
 .project-showcase--1vet .project-showcase__copy > p { color: #244638; }

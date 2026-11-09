@@ -8,6 +8,8 @@ The selection follows `src/content/projectExperiences.ts` in that repository: th
 
 ## 1Vet live captures
 
-The two JPEGs in `public/images/projects/1vet` were captured directly from https://1vet.store/ on 2026-11-09 using Chromium: desktop at 1440 × 1000 and mobile web at 390 × 1100, device scale 1, JPEG quality 88. Images show the public homepage after its loading state completed; they are not private application dashboards or native app screens. Frames are rendered in CSS, retaining the complete captured image proportions.
+The two JPEGs in `public/images/projects/1vet` were captured directly from https://1vet.store/ on 2026-11-09 using Chromium: desktop at 1440 × 1000 and mobile web at 390 × 844, device scale 1, JPEG quality 88. Images show the public homepage after its loading state completed; they are not private application dashboards or native app screens. Frames are rendered in CSS, retaining the complete captured image proportions.
 
 The cloud policy blocked the public site's external Google Fonts request, payment script and online-vet counter request during capture. The homepage's own layout and photographic assets loaded; screenshots use its fallback fonts. No authentication, payment, or contact actions were performed.
+
+The 1Vet mobile capture uses a standard phone viewport rather than an extended page-height capture, keeping the mockup proportional to the other device showcases.

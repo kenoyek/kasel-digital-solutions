@@ -37,7 +37,7 @@ export const projectExperiences: Record<string, ProductView[]> = {
       engineering: "Responsive mobile web · Touch-friendly navigation",
       src: "/images/projects/1vet/1vet-public-home-mobile.jpg",
       width: 390,
-      height: 1100,
+      height: 844,
       alt: "1Vet mobile website showing care options, a veterinary consultation image and bottom navigation.",
       format: "phone",
       website: "1vet.store",
